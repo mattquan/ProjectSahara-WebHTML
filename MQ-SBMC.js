@@ -58,7 +58,7 @@ function initEndTable(){
 
     for (var i=0; i<myArray.length; i++) {
         myTable+="<tr><td id='"+i+"e'";
-        myTable+="class='mdl-data-table__cell--non-numeric''onMouseDown ='sendTextUp(this,\"end\")'>"+myArray[i];
+        myTable+="class='mdl-data-table__cell--non-numeric'onMouseDown ='sendTextUp(this,\"end\")'>"+myArray[i];
         myTable+="</td></tr>";
   }  
    myTable+="</tbody></table>";
