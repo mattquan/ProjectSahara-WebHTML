@@ -58,30 +58,22 @@
           <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
           <div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
             <!--main  body of content-->
-            
-            <div id ="textfield-wrapper">
-                 <div id = "startTextField" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                     <input id = "startInput" class="mdl-textfield__input"  type="text" >    
-                     <label id="startLabel" class="mdl-textfield__label" for="startingPosTextField">Enter starting point!</label>
-                 </div> 
+            <div id="myContent">
                 
-                 <div id = "endTextField" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                     <input id = "endInput" class="mdl-textfield__input"  type="text" >    
-                     <label id="endLabel" class="mdl-textfield__label" for="ending">Enter ending point!</label>
-                 </div>
-             </div>
+                
+                <input type="text" id = "StartingPosInput" list = "roomList" placeholder="Enter starting point!">
+                <input type="text" id = "EndingPosInput" list = "roomList" placeholder="Enter ending point!">
+                <datalist id ="roomList"></datalist>
+                
+                
+                
+           
+            
            
             
             
-            <div id ="tableSelection-wrapper">
-                
-                <div id ="startTable"> </div>
-                <div id ="endTable"></div>
-                 
-                
-            </div>
             
-            
+             </div>
           </div>
         </div>
         <footer class="demo-footer mdl-mini-footer">
