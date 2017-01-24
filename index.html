@@ -60,18 +60,32 @@
             <!--main  body of content-->
             <div id="myContent">
                 
-                
-                <input type="text" id = "StartingPosInput" list = "roomList1" placeholder="Enter starting point!">
-                <input type="text" id = "EndingPosInput" list = "roomList2" placeholder="Enter starting point!">
-                <datalist id ="roomList1"></datalist>
-		<datalist id ="roomList2"></datalist>
-		
-
-
-               <button id = "navigateButton" onClick = "navigateButtonClicked()"> NAVIGATE! </button>
-	             <br>
-	             <br>
-	             
+                <div id ="textfieldsRow">
+                    <input type="text" id = "StartingPosInput" list = "roomList1" placeholder="Enter starting point!">
+                    <input type="text" id = "EndingPosInput" list = "roomList2" placeholder="Enter starting point!">
+                    <datalist id ="roomList1"></datalist>
+                    <datalist id ="roomList2"></datalist>
+		</div>
+                <br>
+                <br>
+                <div id ="buttonRow"
+                     align="center">
+                    <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+                            onClick = "navigateButtonClicked()"
+                            id = "navigateButton">                        
+                    <i class="material-icons blue50">navigation</i>
+                    </button>
+                    
+                    
+                </div>
+                <div id ="goRow"
+                     align="center">
+                   <p id="GOtext">
+                       <strong style="font-size: 150%"> GO!</strong>
+                   </p>
+                    
+                    
+                </div>
             </div>
 		  
             <div id="displayedContent" class = "displayedContentHidden">

@@ -101,3 +101,9 @@ opacity: 0;
 .displayedContentVisible{
 visibility: visible;
 }
+
+.material-icons.blue50 { color: #E3F2FD; }
+
+#GOtext {
+    padding-top: 8px;
+}
