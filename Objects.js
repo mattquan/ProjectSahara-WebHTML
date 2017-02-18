@@ -22,3 +22,12 @@ function Path (argument) {
     }
 }
 
+function Edge(weight, targetNode, index, direction, IPAddresses)
+{
+	this.weight = weight;
+	this.targetNode = targetNode;
+	this.index = index;
+	this.direction = direction;
+	this.IPAddresses = IPAddresses;
+}
+
