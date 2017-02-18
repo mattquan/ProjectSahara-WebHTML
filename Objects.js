@@ -31,3 +31,15 @@ function Edge(weight, targetNode, index, direction, IPAddresses)
 	this.IPAddresses = IPAddresses;
 }
 
+function Node(name, description, adjacencies, minPath, IPAddresses)
+{
+	this.name = name;
+	this.description = description;
+	this.adjacencies = adjacencies;
+	this.weight = Number.MAX_VALUE;
+	this.minPath = minPath;
+	this.IPAddresses = IPAddresses;
+}
+
+	
+
