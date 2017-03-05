@@ -232,13 +232,22 @@ var masterList = ["Apnea Center",
             "Smith",
             "Terrone",
             "Warren",
-            "Wolf",];
+            "Wolf"];
 
 onload = init;
+$(document).ready(function(){
+   
+        $(".demo-list-action").fadeOut(0);
+    });
+
 function init() {
     fillStartingInputs();
     fillEndingInputs();
+ 
+
+
 }
+
 function fillStartingInputs() {
     var list1 = document.getElementById('roomList1');
     //create a new option element that fills the datalist (roomList1)
@@ -263,7 +272,9 @@ function fillEndingInputs() {
 
 function navigateButtonClicked() {
 
-	document.getElementById('myContent').className = 'myContentHidden';
+
+	//document.getElementById('myContent').className = 'myContentHidden';
+      $("#textfieldsRow, #buttonRow, #goRow").fadeOut();
 	
 	var selectedList1 = document.getElementById('StartingPosInput');
 	var startingPoint = selectedList1.value;
@@ -275,5 +286,8 @@ function navigateButtonClicked() {
 
         document.getElementById('navigationText').innerHTML = "Navigating from " + startingPoint + " to " + endingPoint + "...";
 
+      $(".demo-list-action").fadeIn();
+
 }
+
 

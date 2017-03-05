@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
   <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="UI.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Saint Barnabas Medical Center Indoor Navigation">
@@ -58,11 +60,11 @@
           <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
           <div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
             <!--main  body of content-->
-            <div id="myContent">
+            
                 
                 <div id ="textfieldsRow">
                     <input type="text" id = "StartingPosInput" list = "roomList1" placeholder="Enter starting point!">
-                    <input type="text" id = "EndingPosInput" list = "roomList2" placeholder="Enter starting point!">
+                    <input type="text" id = "EndingPosInput" list = "roomList2" placeholder="Enter ending point!">
                     <datalist id ="roomList1"></datalist>
                     <datalist id ="roomList2"></datalist>
 		</div>
@@ -78,6 +80,45 @@
                     
                     
                 </div>
+                
+            
+
+		  
+            <div id="displayedContent" class = "displayedContentHidden">
+
+
+		<p id = "navigationText"></p>	
+
+    <style>
+                          .demo-list-action {
+                           width: 300px;
+                }
+                </style>
+
+                <div class="demo-list-action directionList">
+                 <div class="mdl-list__item">
+                   <span class="mdl-list__item-primary-content">
+                   <span>Bryan Cranston</span>
+                   </span>
+                  <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
+                  </div>
+                   <div class="mdl-list__item">
+                  <span class="mdl-list__item-primary-content">
+                  
+                   <span>Aaron Paul</span>
+                  </span>
+                   <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
+                   </div>
+                   <div class="mdl-list__item">
+                   <span class="mdl-list__item-primary-content">
+      
+                   <span>Bob Odenkirk</span>
+                   </span>
+                   <span class="mdl-list__item-secondary-content">
+                    <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
+                    </span>
+                    </div>
+                    </div>
                 <div id ="goRow"
                      align="center">
                    <p id="GOtext">
@@ -86,11 +127,6 @@
                     
                     
                 </div>
-            </div>
-		  
-            <div id="displayedContent" class = "displayedContentHidden">
-
-		<p id = "navigationText"></p>	
 
 	    </div>
 		  
