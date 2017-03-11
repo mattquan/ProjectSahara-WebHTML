@@ -254,6 +254,7 @@ function fillStartingInputs() {
     for (var i =0; i <masterList.length;i++) {
         var option1 = document.createElement('option'); 
         option1.value = masterList[i];
+        option1.id = i;
         list1.appendChild(option1);
     }
     console.log(list1);  		
@@ -265,6 +266,7 @@ function fillEndingInputs() {
     for (var i =0; i <masterList.length;i++) {
         var option2 = document.createElement('option');
         option2.value = masterList[i];
+        option2.id = i;
         roomList2.appendChild(option2);
     }
     console.log(roomList2);                                                               		
@@ -278,13 +280,18 @@ function navigateButtonClicked() {
 	
 	var selectedList1 = document.getElementById('StartingPosInput');
 	var startingPoint = selectedList1.value;
+        var optS = $('option[value ="'+selectedList1.value+'"]');
+        var idS = optS.attr('id');
 
 	var selectedList2 = document.getElementById('EndingPosInput');
 	var endingPoint = selectedList2.value;
+        
+        var optE = $('option[value ="'+selectedList2.value+'"]');
+        var idE = optE.attr('id');
 	
 	document.getElementById('displayedContent').className = 'displayedContentVisible';
 
-        document.getElementById('navigationText').innerHTML = "Navigating from " + startingPoint + " to " + endingPoint + "...";
+        document.getElementById('navigationText').innerHTML = "Navigating from " + startingPoint +idS+ " to " + endingPoint + idE+"...";
 
       $(".demo-list-action").fadeIn();
 
