@@ -68,6 +68,8 @@
                     <datalist id ="roomList1"></datalist>
                     <datalist id ="roomList2"></datalist>
 		</div>
+              
+              
                 <br>
                 <br>
                 <div id ="buttonRow"
@@ -81,12 +83,29 @@
                     
                 </div>
                 
-            
+            <div id ="goRow"
+                     align="center">
+                   <p id="GOtext">
+                       <strong style="font-size: 150%"> GO!</strong>
+                   </p>
+                    
+                    
+                </div>
 
 		  
             <div id="displayedContent" class = "displayedContentHidden">
 
 
+                <div id = "buttonRow"
+                    align = "left">
+                    <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+                        onClick = "javascript:history.go(-1)"
+                        id = "navigateButton">
+                    <i class="material-icons"></i>
+                        back
+                </button>
+                    
+<div/>
 		<p id = "navigationText"></p>	
 
     <style>
@@ -119,14 +138,6 @@
                     </span>
                     </div>
                     </div>
-                <div id ="goRow"
-                     align="center">
-                   <p id="GOtext">
-                       <strong style="font-size: 150%"> GO!</strong>
-                   </p>
-                    
-                    
-                </div>
 
 	    </div>
 		  
