@@ -315,6 +315,14 @@ function navigateButtonClicked() {
             $(".demo-list-action").fadeIn();
         }
 
+function backButtonClicked() {
+
+        $(".demo-list-action").fadeOut();
+
+        $("#textfieldsRow, #buttonRow, #goRow").fadeIn();
+
+}
+
 }
 
 
