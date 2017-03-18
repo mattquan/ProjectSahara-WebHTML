@@ -108,42 +108,53 @@
 <div/>
 		<p id = "navigationText"></p>	
 
-    <style>
-                          .demo-list-action {
-                           width: 300px;
-                }
-                </style>
+<style>
+.demo-list-control {
+  width: 300px;
+}
 
+.demo-list-radio {
+  display: inline;
+}
+</style>
 
-                <div class="demo-list-action directionList">
-                 <div class="mdl-list__item">
-                   <span class="mdl-list__item-primary-content">
-                   <span>Bryan Cranston</span>
-                   </span>
-                  <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
-                  </div>
-                   <div class="mdl-list__item">
-                  <span class="mdl-list__item-primary-content">
-                  
-                   <span>Aaron Paul</span>
-                  </span>
-                   <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
-                   </div>
-                   <div class="mdl-list__item">
-                   <span class="mdl-list__item-primary-content">
+<ul class="demo-list-control mdl-list">
+    </li>
+  <li class="mdl-list__item">
+    <span class="mdl-list__item-primary-content">
       
-                   <span>Bob Odenkirk</span>
-                   </span>
-                   <span class="mdl-list__item-secondary-content">
-                    <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
-                    </span>
-                    </div>
-                    </div>
-
-	    </div>
-		  
-          </div>
-        </div>
+      Aaron 
+    </span>
+    <span class="mdl-list__item-secondary-action">
+      <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-1">
+        <input type="radio" id="list-option-1" class="mdl-radio__button" name="options" value="1" checked />
+      </label>
+    </span>
+  </li>
+  <li class="mdl-list__item">
+    <span class="mdl-list__item-primary-content">
+     
+      Aaron Paul
+    </span>
+    <span class="mdl-list__item-secondary-action">
+      <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-2">
+        <input type="radio" id="list-option-2" class="mdl-radio__button" name="options" value="1" checked />
+      </label>
+    </span>
+  </li>
+   </li>
+  <li class="mdl-list__item">
+    <span class="mdl-list__item-primary-content">
+     
+      Aaron Paul jljkl
+    </span>
+    <span class="mdl-list__item-secondary-action">
+      <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-3">
+        <input type="radio" id="list-option-3" class="mdl-radio__button" name="options" value="1" checked />
+      </label>
+    </span>
+  </li>
+</ul>
         <footer class="demo-footer mdl-mini-footer">
           <div class="mdl-mini-footer--left-section">
             <ul class="mdl-mini-footer--link-list">
