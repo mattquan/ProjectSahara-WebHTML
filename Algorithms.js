@@ -1,10 +1,38 @@
+test();
+
+function test(){
+    var A = {name: "A", myEdges: [{weight: 2, targetNode: "B", index: 0}, {weight: 4, targetNode: "C", index: 1}, {weight: 1, targetNode: "D", index: 2}]};
+    var B = {name: "B", myEdges: [{weight: 2, targetNode: "A", index: 0}, {weight: 3, targetNode: "C", index: 1}, {weight: 1, targetNode: "E", index: 2}]};
+    var C = {name: "C", myEdges: [{weight: 4, targetNode: "A", index: 0}, {weight: 3, targetNode: "B", index: 1}, {weight: 2, targetNode: "E", index: 2}, {weight: 2, targetNode: "F", index: 3}]};
+    var D = {name: "D", myEdges: [{weight: 1, targetNode: "A", index: 0}, {weight: 5, targetNode: "F", index: 1}, {weight: 4, targetNode: "G", index: 2}]};
+    var E = {name: "E", myEdges: [{weight: 1, targetNode: "B", index: 0}, {weight: 2, targetNode: "C", index: 1}, {weight: 3, targetNode: "H", index: 2}]};
+    var F = {name: "F", myEdges: [{weight: 2, targetNode: "C", index: 0}, {weight: 5, targetNode: "D", index: 1}, {weight: 3, targetNode: "G", index: 2}, {weight: 4, targetNode: "J", index: 3}, {weight: 2, targetNode: "I", index: 4}, {weight: 3, targetNode: "H", index: 5}]};
+    var G = {name: "G", myEdges: [{weight: 4, targetNode: "D", index: 0}, {weight: 3, targetNode: "F", index: 1}, {weight: 2, targetNode: "K", index: 2}]};
+    var H = {name: "H", myEdges: [{weight: 3, targetNode: "E", index: 0}, {weight: 3, targetNode: "F", index: 1}, {weight: 1, targetNode: "L", index: 2}, {weight: 8, targetNode: "L", index: 3}]};
+    var I = {name: "I", myEdges: [{weight: 2, targetNode: "F", index: 0}, {weight: 3, targetNode: "J", index: 1}, {weight: 2, targetNode: "M", index: 2}, {weight: 3, targetNode: "L", index: 3}]};
+    var J = {name: "J", myEdges: [{weight: 4, targetNode: "F", index: 0}, {weight: 3, targetNode: "I", index: 1}, {weight: 6, targetNode: "M", index: 2}, {weight: 3, targetNode: "M", index: 3}, {weight: 6, targetNode: "K", index: 4}]};
+    var K = {name: "K", myEdges: [{weight: 2, targetNode: "G", index: 0}, {weight: 6, targetNode: "J", index: 1}, {weight: 4, targetNode: "N", index: 2}, {weight: 2, targetNode: "R", index: 3}]};
+    var L = {name: "L", myEdges: [{weight: 1, targetNode: "H", index: 0}, {weight: 6, targetNode: "O", index: 1}, {weight: 3, targetNode: "M", index: 2}, {weight: 3, targetNode: "I", index: 3}]};
+    var M = {name: "M", myEdges: [{weight: 2, targetNode: "I", index: 0}, {weight: 3, targetNode: "L", index: 1}, {weight: 4, targetNode: "O", index: 2}, {weight: 2, targetNode: "L", index: 3}, {weight: 5, targetNode: "N", index: 4}, {weight: 2, targetNode: "P", index: 5}, {weight: 6, targetNode: "J", index: 6}]};
+    var N = {name: "N", myEdges: [{weight: 4, targetNode: "K", index: 0}, {weight: 3, targetNode: "J", index: 1}, {weight: 5, targetNode: "M", index: 2}, {weight: 2, targetNode: "Q", index: 3}, {weight: 1, targetNode: "R", index: 4}]};
+    var O = {name: "O", myEdges: [{weight: 8, targetNode: "H", index: 0}, {weight: 6, targetNode: "L", index: 1}, {weight: 4, targetNode: "M", index: 2}, {weight: 2, targetNode: "P", index: 3}, {weight: 6, targetNode: "S", index: 4}]};
+    var P = {name: "P", myEdges: [{weight: 2, targetNode: "M", index: 0}, {weight: 2, targetNode: "O", index: 1}, {weight: 2, targetNode: "S", index: 2}, {weight: 1, targetNode: "T", index: 3}, {weight: 1, targetNode: "Q", index: 4}]};
+    var Q = {name: "Q", myEdges: [{weight: 2, targetNode: "N", index: 0}, {weight: 1, targetNode: "P", index: 1}, {weight: 3, targetNode: "T", index: 2}, {weight: 8, targetNode: "R", index: 3}]};
+    var R = {name: "R", myEdges: [{weight: 2, targetNode: "K", index: 0}, {weight: 1, targetNode: "N", index: 1}, {weight: 8, targetNode: "Q", index: 2}, {weight: 5, targetNode: "T", index: 3}]};
+    var S = {name: "S", myEdges: [{weight: 6, targetNode: "O", index: 0}, {weight: 2, targetNode: "P", index: 1}, {weight: 2, targetNode: "Z", index: 2}]};
+    var T = {name: "T", myEdges: [{weight: 5, targetNode: "R", index: 0}, {weight: 3, targetNode: "Q", index: 1}, {weight: 1, targetNode: "P", index: 2}, {weight: 8, targetNode: "Z", index: 3}]};
+    var Z = {name: "Z", myEdges: [{weight: 2, targetNode: "S", index: 0}, {weight: 8, targetNode: "T", index: 1}]};
+    var console = console || {log: function(){}};
+    console.log(runDijkstrasAlgorithm([A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, Z], A, Z));
+}
+
 function runDijkstrasAlgorithm(listOfNodes, startingNode, endingNode)
 {
     //creating the unvisted list
-    var unvisted = [];
+    var unvisited = [];
     for(index = 0; index < listOfNodes.length; index++)
-        unvisted += listOfNodes[index];
-    
+        unvisited += listOfNodes[index];
+    console.log("hi");
     //JSON already has starting node, now set weight to 0
     startingNode.weight = 0;   
     //by default, minPath is null. so the first one has to have a non null path so that it can copy to all the other nodes.
