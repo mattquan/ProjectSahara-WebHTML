@@ -65,9 +65,27 @@
             <!--main  body of content-->
             
                 
-                <div id ="textfieldsRow">
-                    <input type="text" id = "StartingPosInput" list = "roomList1" placeholder="Enter starting point!">
-                    <input type="text" id = "EndingPosInput" list = "roomList2" placeholder="Enter ending point!">
+                <div id ="textfieldsRow" align="center">
+                    
+                    <form action="#">
+                        <div class="mdl-textfield mdl-js-textfield" align ="center">
+                            <input class="mdl-textfield__input" type="text" id="StartingPosInput" list="roomList1">
+                            <label class="mdl-textfield__label" for="StartingPosInput">
+                            Current Location...
+                            </label>
+                        </div>
+                    </form>
+                    
+                    <form action="#">
+                        <div class="mdl-textfield mdl-js-textfield" align="center">
+                            <input class="mdl-textfield__input" type="text" id="EndingPosInput" list="roomList2">
+                            <label class="mdl-textfield__label"
+                            for="EndingPosInput">
+                            Choose Destination...
+                            </label>
+                        </div>
+                    </form>
+                    
                     <datalist id ="roomList1"></datalist>
                     <datalist id ="roomList2"></datalist>
 		        </div>
@@ -80,6 +98,7 @@
                             onClick = "navigateButtonClicked()"
                             id = "navigateButton">                        
                     <i class="material-icons blue50">navigation</i>
+                    
                     </button>
                     
                     
@@ -87,8 +106,10 @@
                 
             <div id ="goRow"
                      align="center">
-                   <p id="GOtext">
-                       <strong style="font-size: 150%"> GO!</strong>
+                   <p id="GOtext"
+                       style="font-size: 2000% " 
+                       style="color: #616161;">START
+                    
                    </p>
                     
                     
