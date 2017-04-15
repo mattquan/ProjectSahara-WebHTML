@@ -276,6 +276,20 @@ function fillEndingInputs() {
     console.log(roomList2);                                                               		
 }
 
+function backButtonClick() {
+
+        document.getElementById('displayedContent').className = 'displayedContentHidden';
+
+        $("#textfieldsRow, #buttonRow, #goRow").fadeIn();
+
+        $(".demo-list-control, #buttonRow1, #navigationText").fadeOut();
+
+
+
+        
+
+}
+
 function navigateButtonClicked() {
         var selectedList1 = document.getElementById('StartingPosInput');
 	var startingPoint = selectedList1.value;
@@ -312,16 +326,10 @@ function navigateButtonClicked() {
             document.getElementById('navigationText').innerHTML = "Navigating from " + startingPoint +idS+"nodeID: "+nodeIDS+ "to " + endingPoint + idE+"nodeID: "+nodeIDE +"...";
 
             //transitions
-            $(".demo-list-action").fadeIn();
+            $(".demo-list-control, #buttonRow1, #navigationText").fadeIn();
         }
 
-function backButtonClicked() {
 
-        $(".demo-list-action").fadeOut();
-
-        $("#textfieldsRow, #buttonRow, #goRow").fadeIn();
-
-}
 
 }
 
