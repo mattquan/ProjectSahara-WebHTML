@@ -26,24 +26,28 @@ function test(){
     var S = {name: "S", adjacencies: [{weight: 6, targetNode: O, index: 0}, {weight: 2, targetNode: P, index: 1}, {weight: 2, targetNode: Z, index: 2}], weight: Number.MAX_VALUE, minPath: []};
     var T = {name: "T", adjacencies: [{weight: 5, targetNode: R, index: 0}, {weight: 3, targetNode: Q, index: 1}, {weight: 1, targetNode: P, index: 2}, {weight: 8, targetNode: "Z", index: 3}], weight: Number.MAX_VALUE, minPath: []};
     var Z = {name: "Z", adjacencies: [{weight: 2, targetNode: S, index: 0}, {weight: 8, targetNode: T, index: 1}], weight: Number.MAX_VALUE, minPath: []};*/
-    console.log(runDijkstrasAlgorithm([A, B, C, D, E], A, E));
+    console.log(runDijkstrasAlgorithm([A, B, C, D, E], "A", "E"));
 }
 
 function runDijkstrasAlgorithm(listOfNodes, startingNode, endingNode)
 {
     //creating the unvisted list
     var unvisited = listOfNodes;
+    var indexStart = find(unvisited, startingNode);
+    var indexEnd = find(unvisited, endingNode);
+    
     //var minNode = startingNode;
     //for(index = 0; index < listOfNodes.length; index++)
         //unvisited += listOfNodes[index];
     //JSON already has starting node, now set weight to 0
-    startingNode.weight = 0;   
+    unvisited[indexStart].weight = 0;
+    //startingNode.weight = 0;   
     //by default, minPath is null. so the first one has to have a non null path so that it can copy to all the other nodes.
-    startingNode.minPath = startingNode.name;
+    unvisited[indexStart].minPath = startingNode;
     
     //JSON already has ending node
-    var chosenNode = startingNode;
-    while(chosenNode.name !== endingNode.name)
+    var chosenNode = unvisited[indexStart];
+    while(chosenNode.name !== endingNode)
     {
         for(index = 0; index < chosenNode.adjacencies.length; index++)
         {
@@ -54,17 +58,18 @@ function runDijkstrasAlgorithm(listOfNodes, startingNode, endingNode)
             //basiclaly don't look at the targetnode if, as a node, the targetnode has already been looked at
             //confusing a bit. becuase panda is a target node. but that node only goes to unvisited if it was ever the chosenNode
             //so if panda was already a chosenNode, then don't look at it, basically, if that makes more sense
-            if(binarySearch(panda, unvisited))
+            if(find(panda, unvisited) !== -1)
             {
+                var currentNode = unvisited[find(panda, unvisited)];
                 var suggestedWeight = chosenNode.weight + chosenNode.adjacencies[index].weight;
                 console.log(suggestedWeight);
                 //only if my new weight < my old weight, do i update
-                if(suggestedWeight < panda.weight)
+                if(suggestedWeight < currentNode.weight)
                 {
-                    index2 = find(listOfNodes, chosenNode.name);
+                    //index2 = find(listOfNodes, chosenNode.name);
                     index3 = find(unvisited, chosenNode.name);
                     //update values
-                    listOfNodes[index2].weight = suggestedWeight;
+                    //listOfNodes[index2].weight = suggestedWeight;
                     unvisited[index3].weight = suggestedWeight;
                     
                     //so i can add myself, the panda, to the new improved chain. becuase the old chain came from the chosenNode, the startingNode of the edge (vs. targetNode).
@@ -72,8 +77,8 @@ function runDijkstrasAlgorithm(listOfNodes, startingNode, endingNode)
                     //vestiges of the old chain from chosenNode + the panda node.
                     
                     //var path = chosenNode.minPath;
-                    listOfNodes[index2].minPath = chosenNode.minPath;
-                    listOfNodes[index2].minPath += chosenNode.adjacencies[index];
+                    //listOfNodes[index2].minPath = chosenNode.minPath;
+                    //listOfNodes[index2].minPath += chosenNode.adjacencies[index];
                     unvisited[index3].minPath = chosenNode.minPath;
                     unvisited[index3].minPath += chosenNode.adjacencies[index];
                     //listOfNodes[index].minPath = path;
@@ -82,15 +87,15 @@ function runDijkstrasAlgorithm(listOfNodes, startingNode, endingNode)
         }
         
         unvisited = binarySearchAndDestroyNode(chosenNode.name, unvisited);
-        var minNode = {name: null, adjacencies: [], weight: Number.MAX_VALUE, minPath: []};
+        var minNode = {name: null, adjacencies: [], weight: Number.MAX_VALUE, minPath:[]};
         for(index = 0; index < unvisited.length; index++)
         {
             if(unvisited[index].weight < minNode.weight)
             {
                 minNode = unvisited[index];
             }
-            if(minNode.name === endingNode.name){
-                listOfNodes[find(listOfNodes, endingNode.name)].minPath += chosenNode.minPath;
+            if(minNode.name === endingNode){
+                unvisited[indexEnd].minPath += chosenNode.minPath;
             }
         }
         chosenNode = minNode;
@@ -100,12 +105,13 @@ function runDijkstrasAlgorithm(listOfNodes, startingNode, endingNode)
     //done!
     //this printout works becuase of polymorphism. eventually, chosenNode will = endingNode, and then when that happens, endingNode will have already been altered. 
     //console.log("hi");
-    console.log(listOfNodes[find(listOfNodes, endingNode.name)].minPath);
-    return endingNode.minPath; 
-
-       
+    console.log(unvisited[indexEnd].minPath);
+    return unvisited[indexEnd].minPath;
 }
 
+
+//***need to change to binary search
+//finds the index of a certain node in array
 function find(array, name){
     for(index = 0; index < array.length; index++){
         if(array[index].name === name)
@@ -159,11 +165,11 @@ function binarySearch(checkThis, inThis)
             {
                 searchThis.splice(index, 1);
                 return searchThis;
-            } 
+            }
             else if (searchThis[index].name.toUpperCase().localeCompare(toBeDestroyed.toUpperCase()) < 0) 
             {
                 min = index + 1;
-            } 
+            }
             else 
             { 
                 max = index - 1;
