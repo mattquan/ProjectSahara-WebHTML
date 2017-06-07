@@ -43,33 +43,31 @@ function runDijkstrasAlgorithm(listOfNodes, startingNode, endingNode)
     unvisited[indexStart].weight = 0;
     //startingNode.weight = 0;   
     //by default, minPath is null. so the first one has to have a non null path so that it can copy to all the other nodes.
-    unvisited[indexStart].minPath = startingNode;
+    unvisited[indexStart].minPath.push(startingNode);
     
     //JSON already has ending node
     var chosenNode = unvisited[indexStart];
-    while(chosenNode.name !== endingNode)
-    {
-        for(index = 0; index < chosenNode.adjacencies.length; index++)
-        {
+    while(chosenNode.name !== endingNode){
+        for(index = 0; index < chosenNode.adjacencies.length; index++){
+            console.log(index);
+            console.log(chosenNode.adjacencies.length);
             //panda is that particular targetnode from that particular edge
             var panda = chosenNode.adjacencies[index].targetNode;
+            console.log("checking adjancencies");
             console.log(panda);
             //update only if panda has been unvisited. if it has already been visited, we don't look at it. 
             //basiclaly don't look at the targetnode if, as a node, the targetnode has already been looked at
             //confusing a bit. becuase panda is a target node. but that node only goes to unvisited if it was ever the chosenNode
             //so if panda was already a chosenNode, then don't look at it, basically, if that makes more sense
-            if(find(panda, unvisited) !== -1)
-            {
-                var currentNode = unvisited[find(panda, unvisited)];
+            if(find(unvisited, panda) !== -1){
+                var currentNode = unvisited[find(unvisited,panda)];
                 var suggestedWeight = chosenNode.weight + chosenNode.adjacencies[index].weight;
-                console.log(suggestedWeight);
                 //only if my new weight < my old weight, do i update
-                if(suggestedWeight < currentNode.weight)
-                {
-                    //index2 = find(listOfNodes, chosenNode.name);
+                if(suggestedWeight < currentNode.weight){
+                    index2 = find(listOfNodes, chosenNode.name);
                     index3 = find(unvisited, chosenNode.name);
                     //update values
-                    //listOfNodes[index2].weight = suggestedWeight;
+                    listOfNodes[index2].weight = suggestedWeight;
                     unvisited[index3].weight = suggestedWeight;
                     
                     //so i can add myself, the panda, to the new improved chain. becuase the old chain came from the chosenNode, the startingNode of the edge (vs. targetNode).
@@ -77,25 +75,24 @@ function runDijkstrasAlgorithm(listOfNodes, startingNode, endingNode)
                     //vestiges of the old chain from chosenNode + the panda node.
                     
                     //var path = chosenNode.minPath;
-                    //listOfNodes[index2].minPath = chosenNode.minPath;
-                    //listOfNodes[index2].minPath += chosenNode.adjacencies[index];
-                    unvisited[index3].minPath = chosenNode.minPath;
-                    unvisited[index3].minPath += chosenNode.adjacencies[index];
+                    listOfNodes[index2].minPath = chosenNode.minPath;
+                    listOfNodes[index2].minPath.push(chosenNode.adjacencies[index].targetNode);
+                    //unvisited[index3].minPath = chosenNode.minPath;
+                    //unvisited[index3].minPath += chosenNode.adjacencies[index];
                     //listOfNodes[index].minPath = path;
                 }
             }
         }
-        
+        console.log("out of for loop!!");
         unvisited = binarySearchAndDestroyNode(chosenNode.name, unvisited);
+        console.log(unvisited);
         var minNode = {name: null, adjacencies: [], weight: Number.MAX_VALUE, minPath:[]};
-        for(index = 0; index < unvisited.length; index++)
-        {
-            if(unvisited[index].weight < minNode.weight)
-            {
+        for(index = 0; index < unvisited.length; index++){
+            if(unvisited[index].weight <= minNode.weight){
                 minNode = unvisited[index];
             }
             if(minNode.name === endingNode){
-                unvisited[indexEnd].minPath += chosenNode.minPath;
+                unvisited[indexEnd].minPath = chosenNode.minPath;
             }
         }
         chosenNode = minNode;
