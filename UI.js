@@ -243,7 +243,13 @@ $(document).ready(function(){
 function init() {
     fillStartingInputs();
     fillEndingInputs();
-    console.log(testMyAlg());
+    var A = {name: "A", adjacencies: [{weight: 2, targetNode: "B", index: 0}, {weight: 4, targetNode: "C", index: 1}, {weight: 1, targetNode: "D", index: 2}], weight: Number.MAX_VALUE, minPath: []};
+    var B = {name: "B", adjacencies: [{weight: 2, targetNode: "A", index: 0}, {weight: 3, targetNode: "C", index: 1}, {weight: 1, targetNode: "E", index: 2}], weight: Number.MAX_VALUE, minPath: []};
+    var C = {name: "C", adjacencies: [{weight: 4, targetNode: "A", index: 0}, {weight: 3, targetNode: "B", index: 1}, {weight: 2, targetNode: "E", index: 2}], weight: Number.MAX_VALUE, minPath: []};
+    var D = {name: "D", adjacencies: [{weight: 1, targetNode: "A", index: 0}], weight: Number.MAX_VALUE, minPath: []};
+    var E = {name: "E", adjacencies: [{weight: 1, targetNode: "B", index: 0}, {weight: 2, targetNode: "C", index: 1}], weight: Number.MAX_VALUE, minPath: []};
+    var returnedValue  = runDijkstrasAlgorithm([A, B, C, D, E], A, D)
+    console.log(returnedValue);
  
 
 
@@ -382,65 +388,78 @@ function runDijkstrasAlgorithm(listOfNodes, startingNode, endingNode){
     
     //so continue the while loop until you reach the end
     while(chosenNode.name !== endingNode.name){
+        console.log("new chosenNode");        
+        console.log(chosenNode.name);
         //for each edge in my chosen node, look at that connecting edge and update values if 
         for(var index = 0; index < chosenNode.adjacencies.length; index++){
             //panda is that particular targetnode from that particular edge
             var panda = findAndReturnObject(listOfNodes, chosenNode.adjacencies[index].targetNode);
-            console.log("found a panda");
-            console.log(panda);
+            //console.log("found a panda");
+            //console.log(panda);
             //update only if panda has been unvisited. if it has already been visited, we don't look at it. 
             //basiclaly don't look at the targetnode if, as a node, the targetnode has already been looked at
             //confusing a bit. becuase panda is a target node. but that node only goes to unvisited if it was ever the chosenNode
             //so if panda was already a chosenNode, then don't look at it, basically, if that makes more sense
-            console.log("panda.name");
-            console.log(panda.name);
-            console.log(findInUnvisited(unvisited, panda.name));
+            //console.log("panda.name");
+            //console.log(panda.name);
+            //console.log(findInUnvisited(unvisited, panda.name));
             if(findInUnvisited(unvisited, panda.name) !== -1){
-                console.log("here");
+                //console.log("here");
                 var suggestedWeight = chosenNode.weight + chosenNode.adjacencies[index].weight;
                 //only if my new weight < my old weight, do i update
                 if(suggestedWeight < panda.weight){
                     //update values
                     panda.weight = suggestedWeight;
-                    console.log("changed panda weight");
-                    console.log(panda);
+                    //console.log("changed panda weight");
+                    //console.log(panda);
                     
                     //so i can add myself, the panda, to the new improved chain. becuase the old chain came from the chosenNode, the startingNode of the edge (vs. targetNode).
                     //and THAT path/chain does not include the targetNode/panda. so you have to add itself to the new, min path. beecause the min path takes
                     //vestiges of the old chain from chosenNode + the panda node.
                     
-                    var path = chosenNode.minPath;
-                    console.log("path");
-                    console.log(path);
+                    var path = chosenNode.minPath.slice();
+                    console.log("what is this");
+                    console.log(chosenNode.name);
+                    console.log(chosenNode.minPath);
+                    //console.log("path");
+                    //console.log(path);
                     path.push(panda.name);
                     panda.minPath = path;
-                    console.log("updated panda path");
-                    console.log(panda);
+                    console.log("updated panda's min path");
+                    console.log(panda.name)
+                    console.log(panda.minPath);
                     
                 }
             }
         }
-        binarySearchAndDestroyNode(chosenNode.name, unvisited);
-        console.log("removed from unvisited");
-        console.log(unvisited);
+        //binarySearchAndDestroyNode(chosenNode.name, unvisited);
+        unvisited.splice(unvisited.indexOf(chosenNode.name),1);
+        //console.log("removed from unvisited");
+        //console.log(unvisited);
         
         var minNode = {name: null, adjacencies: [], weight: Number.MAX_VALUE, minPath:[]};
         for(var index = 0; index < unvisited.length; index++){
-            if(unvisited[index].weight <= minNode.weight){
-                minNode = findAndReturnObject(listOfNodes,unvisited[index]);
+            //so unvisited is just a list of names lol
+            var indexToFindWeightInListOfNodes = listOfNodes.indexOf(findAndReturnObject(listOfNodes,unvisited[index]));
+            //console.log("index to find Weight in LIst of Nodes");
+            //console.log(indexToFindWeightInListOfNodes);
+            if(listOfNodes[indexToFindWeightInListOfNodes].weight <= minNode.weight){
+                //console.log("in here");
+                minNode = listOfNodes[indexToFindWeightInListOfNodes];
             }
             
         }
         chosenNode = minNode;
-        console.log(chosenNode);
+        
     }
     
     //done!
     //this printout works becuase of polymorphism. eventually, chosenNode will = endingNode, and then when that happens, endingNode will have already been altered. 
     //console.log("hi");
-    console.log(unvisited[indexEnd].minPath);
-    return unvisited[indexEnd].minPath;
+    console.log(endingNode.minPath);
+    return endingNode.minPath;
 }
+
 
 
 //***need to change to binary search
