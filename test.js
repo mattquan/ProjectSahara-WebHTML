@@ -16,3 +16,12 @@ app.listen(8080, function() {
 app.get('/' , function(req, res) {
   res.sendFile(path.join(_dirname+'/index.html'));
 });
+
+var os = require('os');
+var interfaces = os.networkInterfaces();
+
+Object.keys(interfaces).forEach(function (interfaces) {
+    console.log(interfaces);
+
+
+});
