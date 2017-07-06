@@ -1,9 +1,8 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 var masterList = ["Apnea Center",
             "Vangvanichyakorn",
             "Barnabas Health Retail Pharmacy",
@@ -236,7 +235,7 @@ var masterList = ["Apnea Center",
 
 onload = init;
 $(document).ready(function(){
-   
+
         $(".demo-list-action").fadeOut(0);
     });
 
@@ -250,7 +249,7 @@ function init() {
     var E = {name: "E", adjacencies: [{weight: 1, targetNode: "B", index: 0}, {weight: 2, targetNode: "C", index: 1}], weight: Number.MAX_VALUE, minPath: []};
     var returnedValue  = runDijkstrasAlgorithm([A, B, C, D, E], A, D)
     console.log(returnedValue);
- 
+
 
 
 }
@@ -259,15 +258,15 @@ function fillStartingInputs() {
     var list1 = document.getElementById('roomList1');
     //create a new option element that fills the datalist (roomList1)
     for (var i =0; i <masterList.length;i++) {
-        var option1 = document.createElement('option'); 
+        var option1 = document.createElement('option');
         option1.value = masterList[i];
-        option1.id = i;        
+        option1.id = i;
         //does not need to be unique.
         option1.setAttribute("nodeID","0000"+i);
-        
+
         list1.appendChild(option1);
     }
-    console.log(list1);  		
+    console.log(list1);
 }
 
 function fillEndingInputs() {
@@ -280,7 +279,7 @@ function fillEndingInputs() {
         option2.setAttribute('nodeID',"0000"+i);
         roomList2.appendChild(option2);
     }
-    console.log(roomList2);                                                               		
+    console.log(roomList2);
 }
 
 function backButtonClick() {
@@ -293,7 +292,7 @@ function backButtonClick() {
 
 
 
-        
+
 
 }
 
@@ -307,12 +306,12 @@ function navigateButtonClicked() {
             alert("Input a starting node!");
         }
         else if (endingPoint =="")  {
-            
+
             alert("Input an ending node!");
         }
-    
+
         else {
-    
+
             //document.getElementById('myContent').className = 'myContentHidden';
             //transitions
             $("#textfieldsRow, #buttonRow, #goRow").fadeOut();
@@ -332,6 +331,12 @@ function navigateButtonClicked() {
 
             document.getElementById('navigationText').innerHTML = "Navigating from " + startingPoint +idS+"nodeID: "+nodeIDS+ "to " + endingPoint + idE+"nodeID: "+nodeIDE +"...";
 
+            var httprequest = new XMLHttpRequest();
+            httprequest.open("POST", "http://localhost:8080/summer");
+            httprequest.setRequestHeader("Content-type", "application/json");
+httprequest.send(JSON.stringify({ startingNode : nodeIDS, endingNode:nodeIDE }));
+//https://stackoverflow.com/questions/32084571/why-is-an-object-in-an-xmlhttprequest-sent-to-a-node-express-server-empty
+//$.post('/summer',{user:"hi",password:"p"});
             //transitions
             $(".demo-list-control, #buttonRow1, #navigationText").fadeIn();
         }
@@ -382,21 +387,21 @@ function runDijkstrasAlgorithm(listOfNodes, startingNode, endingNode){
     //so all initialization of startingNode things
     startingNode.weight = 0;
     startingNode.minPath.push(startingNode.name);
-    
+
     //JSON already has ending node
     var chosenNode = startingNode;
-    
+
     //so continue the while loop until you reach the end
     while(chosenNode.name !== endingNode.name){
-        console.log("new chosenNode");        
+        console.log("new chosenNode");
         console.log(chosenNode.name);
-        //for each edge in my chosen node, look at that connecting edge and update values if 
+        //for each edge in my chosen node, look at that connecting edge and update values if
         for(var index = 0; index < chosenNode.adjacencies.length; index++){
             //panda is that particular targetnode from that particular edge
             var panda = findAndReturnObject(listOfNodes, chosenNode.adjacencies[index].targetNode);
             //console.log("found a panda");
             //console.log(panda);
-            //update only if panda has been unvisited. if it has already been visited, we don't look at it. 
+            //update only if panda has been unvisited. if it has already been visited, we don't look at it.
             //basiclaly don't look at the targetnode if, as a node, the targetnode has already been looked at
             //confusing a bit. becuase panda is a target node. but that node only goes to unvisited if it was ever the chosenNode
             //so if panda was already a chosenNode, then don't look at it, basically, if that makes more sense
@@ -412,11 +417,11 @@ function runDijkstrasAlgorithm(listOfNodes, startingNode, endingNode){
                     panda.weight = suggestedWeight;
                     //console.log("changed panda weight");
                     //console.log(panda);
-                    
+
                     //so i can add myself, the panda, to the new improved chain. becuase the old chain came from the chosenNode, the startingNode of the edge (vs. targetNode).
                     //and THAT path/chain does not include the targetNode/panda. so you have to add itself to the new, min path. beecause the min path takes
                     //vestiges of the old chain from chosenNode + the panda node.
-                    
+
                     var path = chosenNode.minPath.slice();
                     console.log("what is this");
                     console.log(chosenNode.name);
@@ -428,7 +433,7 @@ function runDijkstrasAlgorithm(listOfNodes, startingNode, endingNode){
                     console.log("updated panda's min path");
                     console.log(panda.name)
                     console.log(panda.minPath);
-                    
+
                 }
             }
         }
@@ -436,7 +441,7 @@ function runDijkstrasAlgorithm(listOfNodes, startingNode, endingNode){
         unvisited.splice(unvisited.indexOf(chosenNode.name),1);
         //console.log("removed from unvisited");
         //console.log(unvisited);
-        
+
         var minNode = {name: null, adjacencies: [], weight: Number.MAX_VALUE, minPath:[]};
         for(var index = 0; index < unvisited.length; index++){
             //so unvisited is just a list of names lol
@@ -447,14 +452,14 @@ function runDijkstrasAlgorithm(listOfNodes, startingNode, endingNode){
                 //console.log("in here");
                 minNode = listOfNodes[indexToFindWeightInListOfNodes];
             }
-            
+
         }
         chosenNode = minNode;
-        
+
     }
-    
+
     //done!
-    //this printout works becuase of polymorphism. eventually, chosenNode will = endingNode, and then when that happens, endingNode will have already been altered. 
+    //this printout works becuase of polymorphism. eventually, chosenNode will = endingNode, and then when that happens, endingNode will have already been altered.
     //console.log("hi");
     console.log(endingNode.minPath);
     return endingNode.minPath;
@@ -483,7 +488,7 @@ function findAndReturnObject(array, name) {
 //precondition: checkThis is a Node and inThis is a list of Nodes
 function binarySearch(checkThis, inThis)
 {
-    //returns a boolean. checks the path. 
+    //returns a boolean. checks the path.
     //will return true if the path's last element is in the unselected.
     var min = 0;
     var max = inThis.length - 1;
@@ -504,9 +509,9 @@ function binarySearch(checkThis, inThis)
         else
         {
             max = index - 1;
-        }     
+        }
     }
-    
+
     return false;
 }
 
@@ -518,20 +523,20 @@ function binarySearch(checkThis, inThis)
         var max = searchThis.length - 1;
         var index;
 
-        while (max - min > -1) 
+        while (max - min > -1)
         {
             index = Math.floor((min + max) / 2);
-            if (searchThis[index] === toBeDestroyed) 
+            if (searchThis[index] === toBeDestroyed)
             {
                 searchThis.splice(index, 1);
                 return;
             }
-            else if (searchThis[index].localeCompare(toBeDestroyed) < 0) 
+            else if (searchThis[index].localeCompare(toBeDestroyed) < 0)
             {
                 min = index + 1;
             }
-            else 
-            { 
+            else
+            {
                 max = index - 1;
             }
         }
